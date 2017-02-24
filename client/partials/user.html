@@ -1,0 +1,51 @@
+<div ng-controller="bucketController">
+    <h3>{{thisUser.name}}'s Bucket List</h3>
+    <p><a href="/#!/dashboard">Home</a></p>
+    <p><a href="/logout">Log out</a></p>
+    <h5>Done Activities</h5>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Creator</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat = "bucket in theirDone">
+                <td>{{bucket._creator}}</td>
+                <td>{{bucket.title}}</td>
+                <td>{{bucket.description}}</td>
+                <td>{{bucket.created_at | date: 'mediumDate'}}</td>
+                <td>{{bucket.status}}</td>
+                <td><button ng-click = "change(bucket._id)">Change Status</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <h5>Pending Activities</h5>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Creator</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat = "bucket in theirPending">
+                <td>{{bucket._creator}}</td>
+                <td>{{bucket.title}}</td>
+                <td>{{bucket.description}}</td>
+                <td>{{bucket.created_at | date: 'mediumDate'}}</td>
+                <td>{{bucket.status}}</td>
+                <td><button ng-click = "change(bucket._id)">Change Status</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

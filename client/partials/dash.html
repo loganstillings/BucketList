@@ -1,0 +1,46 @@
+<h2>Welcome {{currentUser.name}}</h2>
+<a href="/logout">Log Out</a>
+<hr>
+<h3>Add an item to your Bucket List</h3>
+<div ng-controller="bucketController">
+    <form ng-submit = "addBucket()">
+        <input type="text" ng-model="newBucket.title" placeholder="Title">
+        <input type="text" ng-model="newBucket.description" placeholder="Description">
+        Tag a friend (optional) <select ng-model = "newBucket.tag">
+            <option ng-repeat="user in otherUsers" value ="{{user._id}}">{{user.name}}</option>
+        </select>
+        <input type="submit" value="Add to List">
+    </form>
+    <div class="errors">
+        <p ng-repeat="error in bucketError">{{error}}</p>
+    </div>
+    <hr>
+    <h3>Before I Die I Want to...</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Creator</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat = "bucket in myBuckets">
+                <td>{{bucket._creator}}</td>
+                <td>{{bucket.title}}</td>
+                <td>{{bucket.description}}</td>
+                <td>{{bucket.created_at | date: 'mediumDate'}}</td>
+                <td>{{bucket.status}}</td>
+                <td><button ng-click = "change(bucket._id)">Change Status</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <h3>List of other Users(click to view profile)</h3>
+    <ul>
+        <li ng-repeat="user in otherUsers"><a href = "/#!/user/{{user._id}}">{{user.name}}</a></li>
+    </ul>
+</div>
